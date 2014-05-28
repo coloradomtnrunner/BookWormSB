@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddBookViewController.h"
+
+@class BookSvcCache;
 
 @interface MasterViewController : UITableViewController
 
+@property (strong, nonatomic) BookSvcCache *bookSvc;
+-(IBAction) done:(UIStoryboardSegue *)segue;
 @end
