@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B0AC2E5193A85E2004E3733 /* BookSvcArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0AC2E4193A85E2004E3733 /* BookSvcArchive.m */; };
 		4B3C79DE192FE79B00482F70 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C79DD192FE79B00482F70 /* Book.m */; };
 		4B3C79E2192FE83000482F70 /* BookSvcCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C79E1192FE83000482F70 /* BookSvcCache.m */; };
 		4B3C79E8192FED0800482F70 /* AddBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C79E7192FED0800482F70 /* AddBookViewController.m */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B0AC2E3193A85E2004E3733 /* BookSvcArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookSvcArchive.h; sourceTree = "<group>"; };
+		4B0AC2E4193A85E2004E3733 /* BookSvcArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookSvcArchive.m; sourceTree = "<group>"; };
 		4B3C79DC192FE79B00482F70 /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
 		4B3C79DD192FE79B00482F70 /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
 		4B3C79DF192FE7EF00482F70 /* BookSvc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookSvc.h; sourceTree = "<group>"; };
@@ -100,6 +103,8 @@
 				4B3C79DF192FE7EF00482F70 /* BookSvc.h */,
 				4B3C79E0192FE83000482F70 /* BookSvcCache.h */,
 				4B3C79E1192FE83000482F70 /* BookSvcCache.m */,
+				4B0AC2E3193A85E2004E3733 /* BookSvcArchive.h */,
+				4B0AC2E4193A85E2004E3733 /* BookSvcArchive.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -283,6 +288,7 @@
 				4BAF46A0192F94C300AAD798 /* AppDelegate.m in Sources */,
 				4BAF46A6192F94C300AAD798 /* MasterViewController.m in Sources */,
 				4BAF469C192F94C300AAD798 /* main.m in Sources */,
+				4B0AC2E5193A85E2004E3733 /* BookSvcArchive.m in Sources */,
 				4B3C79E2192FE83000482F70 /* BookSvcCache.m in Sources */,
 				4B3C79E8192FED0800482F70 /* AddBookViewController.m in Sources */,
 				4BAF46A9192F94C300AAD798 /* DetailViewController.m in Sources */,

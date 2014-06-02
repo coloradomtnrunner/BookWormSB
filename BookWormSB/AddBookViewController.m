@@ -34,34 +34,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+// turn off selector warning
+#pragma GCC diagnostic ignored "-Wundeclared-selector"
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-- (IBAction)addBook:(id)sender {
-    
-    [self.view endEditing:YES];
-    
-    Book *book = [[Book alloc]init];
-    book.title = _bookTitle.text;
-    book.author = _author.text;
-    book.yearpub = _yearPub.text;
-    book.dateread = _dateRead.text;
-    book.review = _review.text;
-    book.rating = _rating.text;
-  //[bookSvc createBook:book];
-    
-    NSLog(@"book added, returning to main view");
-    
-}
+// The seque is called when the user presses Save from the add book screen, it will store
+// each field for the book to be passed back to the main view controller
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
@@ -83,6 +61,8 @@
         
     }
 }
+
+#pragma mark Keyboard Management
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     if ((textField == self.bookTitle) || (textField == self.author) || (textField == self.yearPub) ||
@@ -118,56 +98,24 @@
 }
 
 
-
 // Called when the UIKeyboardDidShowNotification is sent.
 
-- (void)keyboardWasShown:(NSNotification*)aNotification
+- (void)keyboardWasShown
 
 {
     
-    NSDictionary* info = [aNotification userInfo];
-    
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-    
-    
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
-    
-    self.scrollView.contentInset = contentInsets;
-    
-    self.scrollView.scrollIndicatorInsets = contentInsets;
-    
-    NSLog(@"in keyboard scroll view");
-    
-    // If active text field is hidden by keyboard, scroll it so it's visible
-    
-    // Your app might not need or want this behavior.
-    
-    CGRect aRect = self.view.frame;
-    
-    aRect.size.height -= kbSize.height;
-    
-    if (!CGRectContainsPoint(aRect, self.activeField.frame.origin) ) {
-        
-        [self.scrollView scrollRectToVisible:self.activeField.frame animated:YES];
-        
-    }
+
+    CGFloat desiredMove = -70.0f;
+    [self.view setFrame:CGRectMake(0, desiredMove, self.view.frame.size.width, self.view.frame.size.height)];
     
 }
 
-
-
 // Called when the UIKeyboardWillHideNotification is sent
 
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+- (void)keyboardWillBeHidden
 
 {
-    
-    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-    
-    self.scrollView.contentInset = contentInsets;
-    
-    self.scrollView.scrollIndicatorInsets = contentInsets;
+    [self.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     
 }
 
@@ -176,16 +124,30 @@
 {
     
     self.activeField = textField;
+    if(textField == self.review) {
+        [self registerForKeyboardNotifications];
+        if([self.activeField isFirstResponder]) {
+            [self keyboardWasShown];
+        }
+    }
     
 }
-
 
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 
 {
     
-    self.activeField = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
+}
+
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([self.activeField isFirstResponder] && [touch view] != self.activeField) {
+        [self.activeField resignFirstResponder];
+        [self keyboardWillBeHidden];
+    }
+    [super touchesBegan:touches withEvent:event];
 }
 @end

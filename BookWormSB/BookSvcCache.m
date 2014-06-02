@@ -5,6 +5,9 @@
 //  Created by Nancy Brokaw on 5/23/14.
 //  Copyright (c) 2014 msse650. All rights reserved.
 //
+//  Implementation of BookSvc for unpersisted storage, stores new books to arrays that will not
+//  be saved upon exite of application.
+//
 
 #import "BookSvcCache.h"
 #import "Book.h"

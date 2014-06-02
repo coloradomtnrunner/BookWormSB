@@ -5,6 +5,8 @@
 //  Created by Nancy Brokaw on 5/23/14.
 //  Copyright (c) 2014 msse650. All rights reserved.
 //
+//  This is the interface that must be implemented to create a book service factory.
+//
 
 #import <Foundation/Foundation.h>
 #import "Book.h"

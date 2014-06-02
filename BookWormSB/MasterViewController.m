@@ -8,28 +8,23 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
-#import "BookSvcCache.h"
 #import "Book.h"
 #import "AddBookViewController.h"
+#import "BookSvcArchive.h"
 
-/*
-@interface MasterViewController () {
-    NSMutableArray *_objects;
-}
-@end
-*/
+
 @implementation MasterViewController
 
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    self.bookSvc = [[BookSvcCache alloc]init];
+    self.bookSvc = [[BookSvcArchive alloc]init];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
   /*  UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
@@ -119,7 +114,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"prepare for seg entered, ident is %@", [segue identifier]);
+    //NSLog(@"prepare for seg entered, ident is %@", [segue identifier]);
+    
+    // check seque identifier for show detail, if so, move to detail view controller
+    
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         Book *object = [[self.bookSvc retrieveAllBooks] objectAtIndex:indexPath.row];
@@ -131,16 +129,15 @@
 
 }
 
+// unwind seque for adding a new book to the master book list
+
 - (IBAction)done:(UIStoryboardSegue *)segue {
-    NSLog(@"done seg entered");
-    NSLog(@"seg identifier is: %@", [segue identifier]);
+
     if ([[segue identifier] isEqualToString:@"newBook"]) {
         NSLog(@"segue for add book entered");
         
         AddBookViewController *addController = [segue sourceViewController];
-        NSLog(@"book added title: %@ ", addController.book.title);
-                NSLog(@"book added author: %@ ", addController.book.author);
-        NSLog(@"book added rating: %@", addController.book.rating);
+
         if (addController.book) {
             
             NSLog(@"book added title: %@ ", addController.book.title);
