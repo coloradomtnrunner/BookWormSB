@@ -5,6 +5,8 @@
 //  Created by Nancy Brokaw on 5/31/14.
 //  Copyright (c) 2014 msse650. All rights reserved.
 //
+//  Book Svc Archive is an implementation of BookSvc that uses persistent storage of books via NSKeyedArchiver.
+//
 
 #import "BookSvcArchive.h"
 
@@ -15,6 +17,8 @@ NSMutableArray *books;
 
 - (id) init {
     
+    //create file name and path for book storage on creation of object
+    
     NSLog(@"in init for booksvcarchive");
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
@@ -22,6 +26,7 @@ NSMutableArray *books;
     
     NSLog(@"File path is %@", filePath);
 
+    // Load up all books and return
     [self readArchive];
     return self;
 }
